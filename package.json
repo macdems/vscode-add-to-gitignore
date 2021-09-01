@@ -7,7 +7,7 @@
 		"type": "git",
 		"url": "https://github.com/macdems/vscode-add-to-gitignore.git"
 	},
-	"version": "0.0.1",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.51.0"
 	},
@@ -16,7 +16,8 @@
 	],
 	"activationEvents": [
 		"onView:explorer",
-		"onCommand:addToGitignore.addFileToGitIgnore"
+		"onCommand:addToGitignore.addFileToGitIgnore",
+		"onCommand:addToGitignore.addFileToGitExclude"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -24,12 +25,20 @@
 			{
 				"command": "addToGitignore.addFileToGitIgnore",
 				"title": "Add to .gitignore..."
+			},
+			{
+				"command": "addToGitignore.addFileToGitExclude",
+				"title": "Add to .git/info/exclude..."
 			}
 		],
 		"menus": {
 			"explorer/context": [
 				{
 					"command": "addToGitignore.addFileToGitIgnore",
+					"group": "git"
+				},
+				{
+					"command": "addToGitignore.addFileToGitExclude",
 					"group": "git"
 				}
 			],

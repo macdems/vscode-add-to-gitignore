@@ -74,10 +74,23 @@ export async function addFileToGitIgnore(uri: vscode.Uri) {
     }
 }
 
-export function activate(context: vscode.ExtensionContext) {
-    let disposable = vscode.commands.registerCommand("addToGitignore.addFileToGitIgnore", addFileToGitIgnore);
+export async function addFileToGitExclude(uri: vscode.Uri) {
+    const root = getRoot(uri.path);
+    if (!root) {
+        return;
+    }
+    const patterns = getPatterns(root, uri.path);
+    const pattern = await vscode.window.showQuickPick(patterns, {
+        placeHolder: "Select pattern to add...",
+    });
+    if (pattern) {
+        await addPathToIgnore(root, pattern, path.join(".git", "info", "exclude"));
+    }
+}
 
-    context.subscriptions.push(disposable);
+export function activate(context: vscode.ExtensionContext) {
+    context.subscriptions.push(vscode.commands.registerCommand("addToGitignore.addFileToGitIgnore", addFileToGitIgnore));
+    context.subscriptions.push(vscode.commands.registerCommand("addToGitignore.addFileToGitExclude", addFileToGitExclude));
 }
 
 export function deactivate() {}
