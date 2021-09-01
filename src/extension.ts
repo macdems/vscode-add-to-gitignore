@@ -7,7 +7,7 @@ const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 
 function getRoot(pathname: string) {
-    return vscode.workspace.workspaceFolders?.find((f) => pathname.startsWith(f.uri.path))?.uri.path;
+    return vscode.workspace.workspaceFolders?.find((f) => pathname.startsWith(f.uri.path))?.uri.fsPath;
 }
 
 function getPatterns(root: string, pathname: string) {
