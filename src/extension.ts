@@ -6,6 +6,11 @@ import { promisify } from "util";
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 
+const IGNORE_FILES: { [display: string]: string } = {
+    '.gitignore (shared)': '.gitignore',
+    '.git/info/exclude (private)': path.join(".git", "info", "exclude")
+};
+
 function getRoot(pathname: string) {
     return vscode.workspace.workspaceFolders?.find((f) => pathname.startsWith(f.uri.path))?.uri.fsPath;
 }
@@ -69,28 +74,21 @@ export async function addFileToGitIgnore(uri: vscode.Uri) {
     const pattern = await vscode.window.showQuickPick(patterns, {
         placeHolder: "Select pattern to add...",
     });
-    if (pattern) {
-        await addPathToIgnore(root, pattern);
-    }
-}
-
-export async function addFileToGitExclude(uri: vscode.Uri) {
-    const root = getRoot(uri.path);
-    if (!root) {
+    if (!pattern) {
         return;
     }
-    const patterns = getPatterns(root, uri.path);
-    const pattern = await vscode.window.showQuickPick(patterns, {
-        placeHolder: "Select pattern to add...",
+    const selected_file = await vscode.window.showQuickPick(Object.keys(IGNORE_FILES), {
+        placeHolder: `Select file to add '${pattern}' to...`,
     });
-    if (pattern) {
-        await addPathToIgnore(root, pattern, path.join(".git", "info", "exclude"));
+    if (!selected_file) {
+        return;
     }
+
+    await addPathToIgnore(root, pattern, IGNORE_FILES[selected_file]);
 }
 
 export function activate(context: vscode.ExtensionContext) {
     context.subscriptions.push(vscode.commands.registerCommand("addToGitignore.addFileToGitIgnore", addFileToGitIgnore));
-    context.subscriptions.push(vscode.commands.registerCommand("addToGitignore.addFileToGitExclude", addFileToGitExclude));
 }
 
 export function deactivate() {}
