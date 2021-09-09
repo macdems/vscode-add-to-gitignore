@@ -3,11 +3,13 @@
 	"displayName": "Add to GIT Ignore",
 	"description": "Add file to .gitignore",
 	"publisher": "maciejdems",
+	"license": "MIT",
+	"icon": "images/icon.png",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/macdems/vscode-add-to-gitignore.git"
 	},
-	"version": "0.1.1",
+	"version": "1.0.0",
 	"engines": {
 		"vscode": "^1.51.0"
 	},
