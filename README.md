@@ -1,6 +1,6 @@
 # git-ignore-file README
 
-This is the README for the extension "Add to GIT ignore", which adds files to `.gitignore` or `.git/info/exclude`.
+This an extension "Add to GIT ignore", which adds files to `.gitignore` or `.git/info/exclude`.
 
 ## Features
 
@@ -23,3 +23,7 @@ Next, you need to select whether to add the pattern to the `.gitignore` file (th
 ## Release Notes
 
 See the [changelog](CHANGELOG.md)
+
+## Contributors
+
+- [Spar](https://github.com/GitSparTV)
