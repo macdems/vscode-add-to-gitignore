@@ -4,11 +4,11 @@ This is the README for the extension "Add to GIT ignore", which adds files to `.
 
 ## Features
 
-Add files or general patterns based on their filename to `.gitignore` or `.git/info/exclude`.
+Add files/folder or general patterns based on their filename to `.gitignore` or `.git/info/exclude`.
 
 ## Usage
 
-Right-click the file in the *Explorer* and select `Add to GIT Ignore List...`.
+Right-click the file or folder in the *Explorer* or *Source Control* and select `Add to GIT Ignore List...`.
 
 ![Explorer menu](images/screenshot1.png)
 

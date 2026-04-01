@@ -9,30 +9,63 @@
 		"type": "git",
 		"url": "https://github.com/macdems/vscode-add-to-gitignore.git"
 	},
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"engines": {
-		"vscode": "^1.51.0"
+		"vscode": "^1.74.0"
 	},
 	"categories": [
 		"Other"
 	],
-	"activationEvents": [
-		"onView:explorer",
-		"onCommand:addToGitignore.addFileToGitIgnore"
+	"keywords": [
+		"git",
+		"gitignore"
 	],
+	"activationEvents": [],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [
 			{
+				"command": "addToGitignore.addFolderToGitIgnore",
+				"title": "Add to GIT Ignore List..."
+			},
+			{
 				"command": "addToGitignore.addFileToGitIgnore",
+				"title": "Add to GIT Ignore List..."
+			},
+			{
+				"command": "addToGitignore.addFolderToGitIgnoreFromSCM",
+				"title": "Add to GIT Ignore List..."
+			},
+			{
+				"command": "addToGitignore.addFileToGitIgnoreFromSCM",
 				"title": "Add to GIT Ignore List..."
 			}
 		],
 		"menus": {
 			"explorer/context": [
 				{
-					"command": "addToGitignore.addFileToGitIgnore",
+					"command": "addToGitignore.addFolderToGitIgnore",
+					"when": "explorerResourceIsFolder",
 					"group": "git"
+				},
+				{
+					"command": "addToGitignore.addFileToGitIgnore",
+					"when": "!explorerResourceIsFolder",
+					"group": "git"
+				}
+			],
+			"scm/resourceFolder/context": [
+				{
+					"command": "addToGitignore.addFolderToGitIgnoreFromSCM",
+					"when": "scmProvider == git && (scmResourceGroup == workingTree || scmResourceGroup == untracked)",
+					"group": "1_modification"
+				}
+			],
+			"scm/resourceState/context": [
+				{
+					"command": "addToGitignore.addFileToGitIgnoreFromSCM",
+					"when": "scmProvider == git && (scmResourceGroup == workingTree || scmResourceGroup == untracked)",
+					"group": "1_modification"
 				}
 			],
 			"commandPalette": []
